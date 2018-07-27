@@ -21,6 +21,14 @@ public class Slot : MonoBehaviour
 		is_full = true;
 	}
 
+	public void OnClick()
+	{
+		//DestroyImmediate(item.Sprite, true);
+		//Destroy(image.item);
+		//Icon.sprite = this.Icon.sprite;
+		is_full = false;
+	}
+
 	// Hold items.
 	// Trash Items
 	// Use Items || equip || deploy
