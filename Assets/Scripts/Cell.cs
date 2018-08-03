@@ -5,6 +5,7 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
 	[SerializeField] private List<Cell> neighbors = new List<Cell>();
+
 	public bool Visited = false;
 
 	public void TargetNeighbors()
@@ -21,15 +22,25 @@ public class Cell : MonoBehaviour
 
 	public Cell GetRandomNeighbor()
 	{
-		int random = Random.Range(0, neighbors.Count);
+		if (neighbors.Count > 0)
+		{
+			int random = Random.Range(0, neighbors.Count);
 
-		if(neighbors[random].Visited == true)
-		{
-			return null;
+			if (neighbors[random].Visited == false)
+			{
+				Cell neighbor = neighbors[random];  // Store a brief reference.
+				neighbors.RemoveAt(random);         // Remove from our list.
+
+				return neighbor;
+			}
+			else
+			{
+				// Remove and check for more neighbors
+				neighbors.RemoveAt(random);
+
+				return GetRandomNeighbor();
+			}
 		}
-		else
-		{
-			return neighbors[random];
-		}
+		return null;
 	}
 }
